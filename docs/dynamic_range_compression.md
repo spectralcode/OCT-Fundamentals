@@ -71,7 +71,7 @@ The logarithmic depth profile is plotted below:
 
 To obtain meaningful values from the logarithmic calculation, 32-bit floating-point precision is used, enabling the representation of both negative and fractional values resulting from the transformation.
 
-However, for visualization, we need to **quantize the signal to 8-bit**, a process often referred to as **grayscale conversion**. This involves scaling the logarithmic depth profile to fit within the range \([0, 255]\), and rounding the values to integers:
+However, for visualization, we need to **quantize the signal to 8-bit**, a process often referred to as **grayscale conversion**. This involves scaling the logarithmic depth profile to fit within the range [0, 255], and rounding the values to integers:
 
 
 $$ \text{Quantized Log Reflectivity} = \left( \frac{\text{Log Reflectivity} - \min}{\max - \min} \right) \cdot 255 $$
