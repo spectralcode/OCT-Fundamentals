@@ -90,6 +90,7 @@ Now, after the 8-bit quantization, the depth profile can be properly displayed, 
 
 To improve image contrast, we truncate the signal by adjusting the values for min and max in the 8-bit quantization. We select these values in such a way that unwanted parts, like noise, are cut off. This stretches the relevant portion of the signal, allowing it to use the full 8-bit range.
 
+Based on the logarithmic depth profile plot, the min value was set to -10 and the max value to 38. This range is suitable for displaying both peaks and cutting off the noise.
 In practice, it may not be easy to set the right values for min and max, as you usually don't know in advance which value range contains the most relevant information. Only after collecting a series of measurements from similar samples can you get a sense of what values for min and max to use. However, if the type of sample changes, you'll likely need to readjust these values.
 
 The truncated and quantized depth profile is shown below:
