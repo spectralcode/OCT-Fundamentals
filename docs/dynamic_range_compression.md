@@ -110,7 +110,7 @@ The concepts discussed above apply equally in 2D:
 ![8-bit Truncated Quantized Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/truncated_quantized_log_depth_profile_2d.png)
 
 ## Conclusion
-To visualize both strong and weak reflections within the same depth profile, a logarithmic scale is used to compress the dynamic range. Grayscale conversion is then applied to display the log-transformed data on 8-bit screens. Min-Max Scaling can improve image contrast by removing noise and making the important areas use the full 8-bit range. However, what is considered noise or important depends on the specific application, so the Min-Max scaling must be adjusted accordingly.
+To visualize both strong and weak reflections within the same depth profile, a logarithmic scale is used to compress the dynamic range. Grayscale conversion is then applied to display the log-transformed data on 8-bit screens. Min-Max Scaling can improve image contrast by clipping noise and making the important areas use the full 8-bit range. However, what is considered noise or important depends on the specific application, so the Min-Max scaling must be adjusted accordingly.
 
 ## Code
 The code used to generate the plots above can be found here:
