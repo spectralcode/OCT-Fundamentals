@@ -52,9 +52,6 @@ The resulting depth profile is shown below:
 
 Note that the height of the two peaks is __not quite__ equal to the reflectivity values set during the modeling of the raw signal. Due to the added noise, the amplitudes vary slightly, causing the peaks to differ slightly from the exact reflectivity values. Without the noise, the peak heights would match the reflectivity values exactly.
 
-It's also important to note that the depth profile remains in the 8-bit range; the FFT does not change the bit depth of the signal.
-
-
 
 ## 3. Logarithmic Depth Profile
 
