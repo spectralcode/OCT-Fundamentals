@@ -89,7 +89,7 @@ The result is the following 8-bit quantized depth profile:
 
 ## 5. Truncated 8-bit Quantized Depth Profile
 
-Now, after the 8-bit quantization, the depth profile can be properly displayed, but almost half of the reflectivity range is wasted on noise!
+Now, after the 8-bit quantization, the depth profile can be properly displayed, but nearly one-third of the reflectivity range is wasted on noise!
 
 To improve image contrast, we truncate the signal by adjusting the values for min and max in the 8-bit quantization. We select these values in such a way that unwanted parts, like noise, are cut off. This stretches the relevant portion of the signal, allowing it to use the full 8-bit range.
 
