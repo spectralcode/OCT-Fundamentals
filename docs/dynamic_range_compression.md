@@ -29,16 +29,16 @@ The OCT signal is modeled as a sum of two cosine functions with added random noi
 $$ s(k) = A_1 \cdot \cos(2\pi \cdot d_1 \cdot k) + A_2 \cdot \cos(2\pi \cdot d_2 \cdot k) + \text{noise}(k) $$
 
 Where:
-- \( A_1 = 80 \) reflectivity of first layer
-- \( d_1 = 60000 \) position of first layer
-- \( A_2 = 8 \) reflectivity of second layer
-- \( d_2 = 500000 \) position of second layer
-- noise(\( k \))  random noise function.
-- \( k \) wavenumber
+- **A_1 = 80** reflectivity of first layer
+- **d_1 = 60000** position of first layer
+- **A_2 = 8** reflectivity of second layer
+- **d_2 = 500000** position of second layer
+- **noise(k)**  random noise function.
+- **k** wavenumber
 
 The raw signal in the wavenumber domain is plotted below:
 
-![Raw OCT Signal (8-bit)](images\dynamic_range_compression\raw_oct_signal.png)
+![Raw OCT Signal (8-bit)](images/dynamic_range_compression/raw_oct_signal.png)
 
 ## 2. FFT to Generate Depth Profile
 
@@ -48,7 +48,7 @@ $$ \text{Depth Profile} = \left| \text{FFT}(s(k)) \right| $$
 
 The resulting depth profile is shown below:
 
-![Depth Profile (A-scan)](images\dynamic_range_compression\depth_profile.png)
+![Depth Profile (A-scan)](images/dynamic_range_compression/depth_profile.png)
 
 Note that the height of the two peaks is __not quite__ equal to the reflectivity values set during the modeling of the raw signal. Due to the added noise, the amplitudes vary slightly, causing the peaks to differ slightly from the exact reflectivity values. Without the noise, the peak heights would match the reflectivity values exactly.
 
@@ -65,7 +65,7 @@ $$ \text{Log Reflectivity} = 20 \cdot \log_{10}(\text{Depth Profile}) $$
 
 The logarithmic depth profile is plotted below:
 
-![Logarithmic Depth Profile (A-scan)](images\dynamic_range_compression\logarithmic_depth_profile.png)
+![Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/logarithmic_depth_profile.png)
 
 
 
@@ -80,38 +80,38 @@ However, for visualization, we need to **quantize the signal to 8-bit**, a proce
 $$ \text{Quantized Log Reflectivity} = \left( \frac{\text{Log Reflectivity} - \min}{\max - \min} \right) \cdot 255 $$
 
 Where:
-- \( \min \) is the minimum value of the depth profile.
-- \( \max \) is the maximum value of the depth profile.
+- **min** is the minimum value of the depth profile.
+- **max** is the maximum value of the depth profile.
 
 The result is the following 8-bit quantized depth profile:
 
-![8-bit Quantized Logarithmic Depth Profile (A-scan)](images\dynamic_range_compression\quantized_log_depth_profile.png)
+![8-bit Quantized Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/quantized_log_depth_profile.png)
 
 ## 5. Truncated 8-bit Quantized Depth Profile
 
 Now, after the 8-bit quantization, the depth profile can be properly displayed, but almost half of the reflectivity range is wasted on noise!
 
-To improve image contrast, we truncate the signal by adjusting the values for \( \min \) and \( \max \) in the 8-bit quantization. We select these values in such a way that unwanted parts, like noise, are cut off. This stretches the relevant portion of the signal, allowing it to use the full 8-bit range.
+To improve image contrast, we truncate the signal by adjusting the values for min and max in the 8-bit quantization. We select these values in such a way that unwanted parts, like noise, are cut off. This stretches the relevant portion of the signal, allowing it to use the full 8-bit range.
 
-In practice, it may not be easy to set the right values for \( \min \) and \( \max \), as you usually don't know in advance which value range contains the most relevant information. Only after collecting a series of measurements from similar samples can you get a sense of what values for \( \min \) and \( \max \) to use. However, if the type of sample changes, you'll likely need to readjust these values.
+In practice, it may not be easy to set the right values for min and max, as you usually don't know in advance which value range contains the most relevant information. Only after collecting a series of measurements from similar samples can you get a sense of what values for min and max to use. However, if the type of sample changes, you'll likely need to readjust these values.
 
 
 The truncated and quantized depth profile is shown below:
 
-![8-bit Truncated Quantized Logarithmic Depth Profile (A-scan)](images\dynamic_range_compression\truncated_quantized_log_depth_profile.png)
+![8-bit Truncated Quantized Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/truncated_quantized_log_depth_profile.png)
 
 
 
 ## 2D Images
 The concepts discussed above apply equally in 2D:
 
-![Raw OCT Signal (8-bit)](images\dynamic_range_compression\raw_oct_signal_2d.png)
+![Raw OCT Signal (8-bit)](images/dynamic_range_compression/raw_oct_signal_2d.png)
 
-![Depth Profile (A-scan)](images\dynamic_range_compression\depth_profile_2d.png)
+![Depth Profile (A-scan)](images/dynamic_range_compression/depth_profile_2d.png)
 
-![Logarithmic Depth Profile (A-scan)](images\dynamic_range_compression\logarithmic_depth_profile_2d.png)
+![Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/logarithmic_depth_profile_2d.png)
 
-![8-bit Truncated Quantized Logarithmic Depth Profile (A-scan)](images\dynamic_range_compression\truncated_quantized_log_depth_profile_2d.png)
+![8-bit Truncated Quantized Logarithmic Depth Profile (A-scan)](images/dynamic_range_compression/truncated_quantized_log_depth_profile_2d.png)
 
 ## Conclusion
 To visualize both strong and weak reflections within the same depth profile, a logarithmic scale is used to compress the dynamic range. Grayscale conversion is then applied to display the log-transformed data on 8-bit screens. Min-Max Scaling can improve image contrast by removing noise and making the important areas use the full 8-bit range. However, what is considered noise or important depends on the specific application, so the Min-Max scaling must be adjusted accordingly.
