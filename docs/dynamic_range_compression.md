@@ -50,7 +50,11 @@ The resulting depth profile is shown below:
 
 ![Depth Profile (A-scan)](images/dynamic_range_compression/depth_profile.png)
 
+<!---
+TODO: figure out why the peaks have a different amplitude than the cosine waves. My guess is,that it is not only the added noise but it could also have something todo with the FFT bins. Maybe the peaks do not fall exactly into the bins. slightly changing the distance parameters moves the peaks but it also changes the amplitude! 
+
 Note that the height of the two peaks is __not quite__ equal to the reflectivity values set during the modeling of the raw signal. Due to the added noise, the amplitudes vary slightly, causing the peaks to differ slightly from the exact reflectivity values. Without the noise, the peak heights would match the reflectivity values exactly.
+-->
 
 
 ## 3. Logarithmic Depth Profile
