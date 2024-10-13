@@ -22,12 +22,10 @@ signal = amp1 * np.cos(2 * np.pi * depth1 * k) + amp2 * np.cos(2 * np.pi * depth
 noise_amp = 10  # Noise amplitude
 signal += noise_amp * np.random.normal(size=len(k))
 
-# Rescale the signal to 8-bit range between 0 and 255
-signal_8bit = signal - np.min(signal)  # Shift to make all values positive
+# Convert signal to positive 8-bit integer
+signal_8bit = signal - np.min(signal)  
 signal_8bit = np.clip(signal_8bit, 0, 255)
-
-#signal_8bit = (signal_8bit / np.max(signal_8bit)) * 255  # Scale to 8-bit range
-#signal_8bit = np.round(signal_8bit).astype(np.uint8)  # Convert to 8-bit integer
+signal_8bit = np.round(signal_8bit).astype(np.uint8)     
 
 # Plot the raw OCT signal in the k-domain (wavenumber domain)
 plt.figure()
